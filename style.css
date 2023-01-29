@@ -1,0 +1,65 @@
+body {
+  background-image: linear-gradient(120deg, #4b8bf3 0%, #c2e9fb 100%);
+}
+
+#page_title {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style: oblique;
+  color: blue;
+  margin-left: 15px;
+  font-size: 50px;
+}
+
+#subtitle {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color: blue;
+  margin-left: 15px;
+  font-size: 20px;
+}
+
+.button_class {
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  margin-bottom: 30px;
+  border-radius: 30px;
+  border: 0;
+  opacity: 50%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+}
+
+.button_class:hover {
+  opacity: 1;
+  border: 2px solid #4CAF50; /* Green */
+}
+
+.button_class.clicked {
+  opacity: 1;
+  border: 2px solid #4CAF50; /* Green */
+}
+
+.img_class {
+  width: 100px;
+  height: 100px;
+  transform: 50%, 50%;
+}
+
+.submit {
+  background-color: darkgreen;
+  width:200px;
+  height: 80px;
+  border-radius: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: white;
+  font-size: 30px;
+  float: right;
+  margin-right: 75px;
+  margin-bottom: 100px;
+  position: absolute;
+  left: 1150px;
+  top: 50px;
+  display: none;
+}
+
+

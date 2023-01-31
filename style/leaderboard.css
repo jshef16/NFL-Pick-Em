@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+body {
+  background-image: linear-gradient(120deg, #4b8bf3 0%, #c2e9fb 100%);
+  background-size: auto 100%;
+}
+
+.page_title {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style: oblique;
+  color: blue;
+  margin-left: 15px;
+  font-size: 50px;
+}
+
+.leaders {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .leaders td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .leaders tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .leaders tr:hover {background-color: #ddd;}
+  
+  .leaders th {
+    padding: 8px;
+    text-align: left;
+    background-color: blue;
+    color: white;
+    font-size: large;
+    font-style: oblique;
+  }

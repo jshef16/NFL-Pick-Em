@@ -49,15 +49,20 @@ loginForm.addEventListener('submit', (e) => {
             console.log("Checking " + doc.data()['email'] + " and " + doc.data()['password'] + " against " + user + " and " + pass)
             if (doc.data()['email'] == user) {
                 if (doc.data()['password'] == pass) {
-                    exists = true
+                    exists = true;
+                    setCookie('name', doc.data()['first'], 1);
                     window.location.href = 'main.html';
                 }
             }
         })
-        // if the user is not already in the database
-        if (!exists) {
-            
-        }
     })
 })
 
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  

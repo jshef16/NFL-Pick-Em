@@ -34,6 +34,8 @@ const teams = [
 ];
 
 window.onload = function() {
+  title = document.querySelector('.page_title');
+  title.innerHTML = "Hi, " + getCookie('name');
   teams.forEach( function(v) { 
     div = document.getElementById("buttons");
     text = "<button id='" + v.name + "' class='button_class' onclick='button_click(this)'><img class='img_class' src='" + v.logo + "' alt=''></button>"
@@ -76,3 +78,18 @@ function button_click(button) {
 
 function submit() {console.log('submit')}
 
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}

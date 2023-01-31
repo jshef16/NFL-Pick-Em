@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 body {
   background-image: linear-gradient(120deg, #4b8bf3 0%, #c2e9fb 100%);
 }
 
-#page_title {
+.page_title {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-style: oblique;
   color: blue;
@@ -30,8 +32,11 @@ body {
 }
 
 .button_class:hover {
-  opacity: 1;
   border: 2px solid #4CAF50; /* Green */
+}
+
+.button_class:hover .img_class{
+  transform: scale(1.2);
 }
 
 .button_class.clicked {
@@ -43,6 +48,7 @@ body {
   width: 100px;
   height: 100px;
   transform: 50%, 50%;
+  transition: transform 0.25s ease-in-out;
 }
 
 .submit {

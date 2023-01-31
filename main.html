@@ -3,18 +3,42 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/nav.css">
     <script src="src/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>NFL Pick 'Em</title>
   </head>
   <body>
-      <h1 id="page_title">NFL Pick 'Em</h1>
-      <h2 id="subtitle">Select two teams</h2>
-      <button class="submit" onclick="submit()">Lock In &#128274</button>
-        
-      <div id="buttons"></div>
+    <input id="page-nav-toggle" class="main-navigation-toggle" type="checkbox" />
+    <label for="page-nav-toggle">
+      <svg class="icon--menu-toggle" viewBox="0 0 60 30">
+        <g class="icon-group">
+          <g class="icon--menu">
+            <path d="M 6 0 L 54 0" />
+            <path d="M 6 15 L 54 15" />
+            <path d="M 6 30 L 54 30" />
+          </g>
+          <g class="icon--close">
+            <path d="M 15 0 L 45 30" />
+            <path d="M 15 30 L 45 0" />
+          </g>
+        </g>
+      </svg>
+    </label>
 
-      
+    <nav class="main-navigation">
+      <ul>
+        <li><a href="main.html">Home</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="#0">My Picks</a></li>
+        <li><a href="index.html">Log Out</a></li>
+      </ul>
+    </nav>
+    <h1 class="page_title"></h1>
+    <h2 id="subtitle">Select two teams</h2>
+    <button class="submit" onclick="submit()">Lock In &#128274</button>
+        
+    <div id="buttons"></div>
 
   </body>
 </html>

@@ -32,19 +32,18 @@ const teams = [
   { name: 'Tennessee Titans', logo: "/img/tennessee.png",},
   { name: 'Washington Commanders', logo: "/img/washington.png",}
 ];
-id = 0
+
 window.onload = function() {
   teams.forEach( function(v) { 
     div = document.getElementById("buttons");
-    len = v.name.split(" ").length
-    text = "<button id='" + id + "' class='button_class' onclick='button_click(this)'><img class='img_class' src='" + v.logo + "' alt=''></button>"
+    text = "<button id='" + v.name + "' class='button_class' onclick='button_click(this)'><img class='img_class' src='" + v.logo + "' alt=''></button>"
     div.innerHTML = div.innerHTML + text;
-    id += 1
   } );
 }
 
 let num_clicked_buttons = 0;
 let clicked_buttons = []
+
 function button_click(button) {
   submit_button = document.getElementsByClassName('submit')
     if (button.style.opacity == 1) {                  /* button is currently clicked, getting unclicked */

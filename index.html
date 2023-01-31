@@ -2,10 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="index.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.16.0/firebase-firestore.js"></script>
+        <link rel="stylesheet" href="style/index.css">
         <title>NFL Pick 'Em</title>
     </head>
     <body>
@@ -14,7 +11,7 @@
             <input type="checkbox" id="flip">
             <div class="cover">
               <div class="front">
-                <img src="NFL logo.png" alt="">
+                <img src="img/NFL logo.png" alt="">
               </div>
               <div class="back">
                 <div class="text">
@@ -27,19 +24,17 @@
                 <div class="form-content">
                   <div class="login-form">
                     <div class="title">Log in</div>
-                  <form action="#">
+                  <form id="login">
                     <div class="input-boxes">
                       <div class="input-box">
-                        <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Enter your email" required>
+                        <input type="text" id="lemail" placeholder="Enter your email" required>
                       </div>
                       <div class="input-box">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Enter your password" required>
+                        <input type="password" id="lpassword" placeholder="Enter your password" required>
                       </div>
                       <div class="text"><a href="#">Forgot password?</a></div>
                       <div class="button input-box">
-                        <input type="submit" value="Submit">
+                        <input type="submit" name="submit" class="submit">
                       </div>
                       <div class="text sign-up-text">Don't have an account? <label for="flip">Sign up now</label></div>
                     </div>
@@ -50,44 +45,49 @@
                     <form id="signup">
                         <div class="input-boxes">
                             <div class="input-box">
-                                <input type="text" name="first" id="first" placeholder="Enter your first name" required>
+                                <input type="text" id="first" placeholder="Enter your first name" required>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="last" id="last" placeholder="Enter your last name" required>
+                                <input type="text" id="last" placeholder="Enter your last name" required>
                             </div>
                             <div class="input-box">
-                                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                                <input type="email" id="email" placeholder="Enter your email" required>
                             </div>
                             <div class="input-box">
-                                <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                                <input type="password" id="password" placeholder="Enter your password" required>
                             </div>
                             <div class="button input-box">
-                                <input type="submit" name="submit" id="submit" onclick="signUp()">
+                                <input type="submit" name="submit" class="submit">
                             </div>
                             <div class="text sign-up-text">Already have an account? <label for="flip">Log in now</label></div>
                         </div>
                 </form>
-                <script>
-
-                  // Your web app's Firebase configuration
-                  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-                  const firebaseConfig = {
-                      apiKey: "AIzaSyD75_7uQWQtJHAOce0yYOQOZn7ME6SIoX0",
-                      authDomain: "nfl-pickem-6d43f.firebaseapp.com",
-                      projectId: "nfl-pickem-6d43f",
-                      storageBucket: "nfl-pickem-6d43f.appspot.com",
-                      messagingSenderId: "80897335788",
-                      appId: "1:80897335788:web:5953c3258d37c5b2f7a0c9",
-                      measurementId: "G-HTE07SYLVD"
-                  };
-
-                  // Initialize Firebase
-                  firebase.initializeApp(firebaseConfig);
-                  const db = firebase.firestore();
-                  db.settings({timestampsInSnapshots: true})
-                </script>
-                <script src="index.js"></script>
+                
             </div>
           </div>
+          <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+          <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+          <script>
+
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+              apiKey: "AIzaSyD75_7uQWQtJHAOce0yYOQOZn7ME6SIoX0",
+              authDomain: "nfl-pickem-6d43f.firebaseapp.com",
+              projectId: "nfl-pickem-6d43f",
+              storageBucket: "nfl-pickem-6d43f.appspot.com",
+              messagingSenderId: "80897335788",
+              appId: "1:80897335788:web:5953c3258d37c5b2f7a0c9",
+              measurementId: "G-HTE07SYLVD"
+            };
+          
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+          </script>
+          <script src="src/index.js"></script>
     </body>
 </html>

@@ -50,7 +50,7 @@ loginForm.addEventListener('submit', (e) => {
             if (doc.data()['email'] == user) {
                 if (doc.data()['password'] == pass) {
                     exists = true;
-                    setCookie('name', doc.data()['first'], 1);
+                    setCookie('name', doc.data()['first'], 90);
                     window.location.href = 'main.html';
                 }
             }

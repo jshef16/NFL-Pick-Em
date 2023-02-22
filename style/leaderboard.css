@@ -2,7 +2,7 @@
 
 body {
   background-image: linear-gradient(120deg, #4b8bf3 0%, #c2e9fb 100%);
-  background-size: auto 100%;
+  background-attachment: fixed;
 }
 
 .page_title {
@@ -13,26 +13,35 @@ body {
   font-size: 50px;
 }
 
-.leaders {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .leaders td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .leaders tr:nth-child(even){background-color: #f2f2f2;}
-  
-  .leaders tr:hover {background-color: #ddd;}
-  
-  .leaders th {
-    padding: 8px;
-    text-align: left;
-    background-color: blue;
-    color: white;
-    font-size: large;
-    font-style: oblique;
-  }
+#leaders {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#leaders td,
+#leaders th {
+  border: 2px solid #ddd; /* increase border width */
+  padding: 6px;
+}
+
+#leaders tr:hover {
+  background-color: #ddd;
+}
+
+#leaders th {
+  padding: 6px;
+  text-align: center;
+  background-color: blue;
+  color: white;
+  font-size: x-large;
+  font-style: oblique;
+}
+
+#leaders tr {
+  padding: 6px;
+  text-align: left;
+  font-size: medium;
+}
+

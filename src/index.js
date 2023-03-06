@@ -51,6 +51,7 @@ loginForm.addEventListener('submit', (e) => {
                 if (doc.data()['password'] == pass) {
                     exists = true;
                     setCookie('name', doc.data()['first'], 90);
+                    setCookie('email', doc.data()['email'], 90)
                     window.location.href = 'main.html';
                 }
             }

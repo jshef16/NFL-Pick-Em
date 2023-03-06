@@ -5,10 +5,65 @@ body {
   background-attachment: fixed;
 }
 
+h2 {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    font-size: 25px; 
+    margin-left: 30px;
+}
+
 .page_title {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-style: oblique;
-  color: blue;
-  margin-left: 15px;
-  font-size: 50px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    color: blue;
+    margin-left: 15px;
+    font-size: 50px;
+}
+
+#my-picks {
+    margin: 20px 0;
+}
+
+.header {
+    cursor: pointer;
+    padding: 18px;
+    margin-bottom: 10px;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+    border-radius: 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-style: oblique;
+    font-size: 40px; 
+    font-weight: bold;
+}
+
+.active, .header:hover {
+    background-color: #ccc;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.content-section {
+    display: flex;
+    align-items: center;
+}
+  
+.logo {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.week-score {
+    color: rgb(69, 69, 69);
+    font-size: 20px;
+    font-weight: lighter;
 }

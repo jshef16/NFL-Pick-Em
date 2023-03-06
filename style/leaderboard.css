@@ -5,6 +5,13 @@ body {
   background-attachment: fixed;
 }
 
+h2 {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style: oblique;
+  margin-left: 15px;
+  font-size: large;
+}
+
 .page_title {
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-style: oblique;

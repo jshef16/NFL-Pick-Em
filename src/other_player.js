@@ -1,3 +1,5 @@
+title = document.querySelector('.page_title');
+
 const bigTeams = [
     { name: 'Arizona Cardinals', logo: "/img/arizona.png",},
     { name: 'Atlanta Falcons', logo: "/img/atlanta.png",},
@@ -36,13 +38,16 @@ const bigTeams = [
 picks = document.getElementById('my-picks')
 
 window.onload = function() {
-    var email = getCookie('email')
+    var email = getCookie('other_player')
+    make_title(email)
     getUser(email, function() {
         makeAccordion();
     });
     
 
 };
+
+
 
 function makeAccordion() {
     const accordionHeaders = document.querySelectorAll(".header");
@@ -83,7 +88,7 @@ function getUser(email, callback) {
 }
 
 function makeHTML(teams, scores) {
-    if (teams == []) {
+    if (teams.length === 0) {
         picks.innerHTML = '<h2>No Picks Available</h2>'
     }
     else { 
@@ -101,7 +106,9 @@ function makeHTML(teams, scores) {
     }
 
 }
-  
+
+
+
   function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -116,4 +123,20 @@ function makeHTML(teams, scores) {
       }
     }
     return "";
+  }
+
+function make_title(email) {
+    db.collection('users').where('email', '==', email)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                let name = doc.data()['first'] + " " + doc.data()['last']
+                title.innerHTML = name +"'s Picks";
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+
   }

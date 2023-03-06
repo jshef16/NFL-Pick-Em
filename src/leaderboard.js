@@ -1,10 +1,13 @@
-table = document.getElementById('leaders')
+const table = document.getElementById('leaders'); // get the table element
+const rows = table.getElementsByTagName('tr'); // get all the rows in the table
+const max_id = document.getElementById('max'); // get the max element
 
 window.onload = async function() {
     compute_scores()
     table.innerHTML = await create_table()
     sortTable(1)
-    
+    make_rows_clickable()
+    high_week()
 }
 
 async function create_table() {
@@ -61,3 +64,72 @@ function compute_scores() {
     })
 }
 
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function make_rows_clickable() {
+  // loop through all the rows and add a click event listener to each row
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].addEventListener("click", function() {
+      // get the URL you want to navigate to
+      page = 'other_player.html'
+      let other_player = rows[i].getElementsByTagName('td')[0].innerHTML.trim().split('<')[1].split('(')[1].split(')')[0]
+      setCookie('other_player', other_player, 90)
+      // navigate to the URL
+      if (getCookie('email') == getCookie('other_player')) {
+        window.location.href = 'picks.html';
+      }
+      else {
+        window.location.href = page;
+      }
+      
+    });
+  }
+}
+
+function high_week() {
+  db.collection('users').get().then((querySnapshot) => {
+    let max = 0
+    var inner = ''
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        let teams = doc.data()['teams']
+        let scores = doc.data()['scores']
+        if (teams) {
+          for (let i = 0; i < teams.length - 1; i += 2) {
+            const score1 = scores[i];
+            const score2 = scores[i + 1];
+            const weekScore = score1 + score2;
+            if (weekScore > max) {
+              max = weekScore;
+              let name = doc.data()['first'] + ' ' + doc.data()['last']
+              let week = String(i / 2 + 1)
+              inner = "Highest one week scorer: " + name + ' in week ' + week + ' with ' + max + ' points.'
+            }
+        }
+      }
+    });
+    console.log(inner) 
+    max_id.innerHTML = inner
+});
+}

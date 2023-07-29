@@ -41,6 +41,19 @@ window.onload = function() {
     text = "<button id='" + v.name + "' class='button_class' onclick='button_click(this)'><img class='img_class' src='" + v.logo + "' alt=''></button>"
     div.innerHTML = div.innerHTML + text;
   } );
+
+  var docRef = db.collection("users").doc(getCookie('userID'));
+  docRef.get().then((doc) => {
+    if (doc.exists) {
+        var selected_teams = doc.data().teams;
+        applyOverlay(selected_teams)
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
 }
 
 let num_clicked_buttons = 0;
@@ -104,6 +117,7 @@ function button_click(button) {
 
         myButton.textContent = 'Locked: Opens on Monday at 6am';
         myButton.style.fontSize = '20px'
+        myButton.style.fontWeight = '300'
       }
     }
     else {
@@ -111,6 +125,27 @@ function button_click(button) {
     }
 }
 
+function applyOverlay(selected_teams) {
+  const buttons = document.getElementsByClassName("button_class");
+  const occurrences = {};
+
+  // Count the occurrences of each team in the selected_teams list
+  for (const team of selected_teams) {
+    occurrences[team] = (occurrences[team] || 0) + 1;
+  }
+
+  for (const button of buttons) {
+    const buttonId = button.id;
+    if (occurrences[buttonId] === 1) {
+      button.style.backgroundColor = "yellow";
+    } else if (occurrences[buttonId] === 2) {
+      button.style.backgroundColor = "red";
+      button.onclick = function () {
+        return false;
+      };
+    }
+  }
+}
 
 function submit() {
   userRef = db.collection('users').doc(getCookie('userID'))

@@ -69,14 +69,62 @@ function button_click(button) {
     }
     if (num_clicked_buttons == 2){
       submit_button[0].style.display = 'block'
-      console.log('show')
+      var myButton = document.getElementById('submit');
+      var lockStartDay = 1; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockEndDay = 4; // Thursday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockStartTime = 6; // 6 AM (24-hour format)
+      var lockEndTime = 19; // 7 PM (24-hour format)
+      var currentDate = new Date();
+      var currentDay = currentDate.getDay(); // Get the current day (0-6)
+      var currentHour = currentDate.getHours(); // Get the current hour (0-23)
+
+      if (
+        currentDay >= lockStartDay &&
+        currentDay <= lockEndDay &&
+        (currentDay !== lockEndDay || currentHour <= lockEndTime) &&
+        (currentDay !== lockStartDay || currentHour >= lockStartTime)
+      ) {
+        myButton.classList.remove('locked');
+        myButton.disabled = false;
+        myButton.style.fontSize = '30px'
+      } else {
+        var nextLockDay = lockStartDay;
+        var nextLockTime =
+          currentDay === lockEndDay ? lockStartTime : lockEndTime;
+        var nextLockDayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+          nextLockDay
+        ];
+
+        if (currentDay === lockEndDay && currentHour > lockEndTime) {
+          nextLockDay++;
+          nextLockDayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][
+            nextLockDay
+          ];
+        }
+
+        myButton.textContent = 'Locked: Opens on Monday at 6am';
+        myButton.style.fontSize = '20px'
+      }
     }
-    else {submit_button[0].style.display = 'none'
-    console.log('hide')}
+    else {
+      submit_button[0].style.display = 'none'
+    }
 }
 
 
-function submit() {console.log('submit')}
+function submit() {
+  userRef = db.collection('users').doc(getCookie('userID'))
+  return userRef.update({
+    weekTeams: [clicked_buttons[0].id, clicked_buttons[1].id]
+  })
+  .then(() => {
+      console.log("Document successfully updated!");
+  })
+  .catch((error) => {
+      // The document probably doesn't exist.
+      console.error("Error updating document: ", error);
+  });
+}
 
 function getCookie(cname) {
   var name = cname + "=";

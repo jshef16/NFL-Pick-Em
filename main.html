@@ -36,10 +36,34 @@
     </nav>
     <h1 class="page_title"></h1>
     <h2 id="subtitle">Select two teams</h2>
-    <button class="submit" onclick="submit()">Lock In &#128274</button>
+    <h2 id="subtitle">Selection locks at 7pm Thursday night!</h2>
+    <button id="submit" class="submit" onclick="submit()">Lock In &#128274</button>
         
     <div id="buttons"></div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
 
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyD75_7uQWQtJHAOce0yYOQOZn7ME6SIoX0",
+        authDomain: "nfl-pickem-6d43f.firebaseapp.com",
+        projectId: "nfl-pickem-6d43f",
+        storageBucket: "nfl-pickem-6d43f.appspot.com",
+        messagingSenderId: "80897335788",
+        appId: "1:80897335788:web:5953c3258d37c5b2f7a0c9",
+        measurementId: "G-HTE07SYLVD"
+      };
+    
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
+    <script src="src/main.js"></script>
   </body>
 </html>
 

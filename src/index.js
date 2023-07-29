@@ -43,7 +43,6 @@ loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     var user = loginForm.lemail.value;
     var pass = loginForm.lpassword.value;
-    var exists = false
     db.collection('users').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             console.log("Checking " + doc.data()['email'] + " and " + doc.data()['password'] + " against " + user + " and " + pass)
@@ -51,7 +50,8 @@ loginForm.addEventListener('submit', (e) => {
                 if (doc.data()['password'] == pass) {
                     exists = true;
                     setCookie('name', doc.data()['first'], 90);
-                    setCookie('email', doc.data()['email'], 90)
+                    setCookie('email', doc.data()['email'], 90);
+                    setCookie('userID',doc.id, 90);
                     window.location.href = 'main.html';
                 }
             }

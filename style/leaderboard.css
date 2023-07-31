@@ -35,7 +35,7 @@ h2 {
 
 #leaders tr:hover {
   background-color: #ddd;
-  cursor: grab;
+  cursor: pointer;
 }
 
 #leaders th {

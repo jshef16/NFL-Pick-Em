@@ -15,8 +15,7 @@ async function create_table() {
     
     const snapshot = await db.collection('users').get();
     snapshot.docs.forEach(doc => {
-      console.log(doc.data()['first'] + " " + doc.data()['last'])
-      const add_text = "<tr><td style='text-align: left;'>" + doc.data()['first'] + " " + doc.data()['last'] + "<span style='color:grey; text-align: right; float:right;'> (" + doc.data()['email'] + ") </span> </td><td>" + doc.data()['total'] + "</td></tr>"
+      const add_text = "<tr><td style='text-align: left;'>" + doc.data()['first'] + " " + doc.data()['last'] + "<span style='display: none'> (" + doc.data()['email'] + ") </span> </td><td>" + doc.data()['total'] + "</td></tr>"
       inner += add_text;
     })
     inner += "</tbody>";
@@ -111,6 +110,8 @@ function high_week() {
   db.collection('users').get().then((querySnapshot) => {
     let max = 0
     var inner = ''
+    let names = []
+    let weeks = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         let teams = doc.data()['teams']
@@ -121,15 +122,35 @@ function high_week() {
             const score2 = scores[i + 1];
             const weekScore = score1 + score2;
             if (weekScore > max) {
+              names = []
+              weeks = []
               max = weekScore;
+              var name = doc.data()['first'] + ' ' + doc.data()['last']
+              var week = String(i / 2 + 1)
+              names.push(name)
+              weeks.push(week)
+            }
+            else if (weekScore == max) {
               let name = doc.data()['first'] + ' ' + doc.data()['last']
               let week = String(i / 2 + 1)
-              inner = "Highest one week scorer: " + name + ' in week ' + week + ' with ' + max + ' points.'
+              names.push(name)
+              weeks.push(week)
             }
+        }
+        if (names.length == 1) {
+          inner = "Highest one week scorer: " + name + ' in week ' + week + ' with ' + max + ' points.'
+        }
+        else {
+          console.log(weeks)
+          console.log(names)
+          inner = "Highest one week scorers: " 
+          for (let i = 0; i < names.length; i += 1) {
+            inner += names[i] + ' in week ' + weeks[i] + ', ' 
+          }
+          inner += ' with ' + max + ' points.'
         }
       }
     });
-    console.log(inner) 
     max_id.innerHTML = inner
 });
 }

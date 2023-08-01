@@ -55,7 +55,7 @@ window.onload = function() {
     console.log("Error getting document:", error);
 });
 
-  modal()
+  modal('rulesModal', true)
 }
 
 let num_clicked_buttons = 0;
@@ -85,7 +85,7 @@ function button_click(button) {
     if (num_clicked_buttons == 2){
       submit_button[0].style.display = 'block'
       var myButton = document.getElementById('submit');
-      var lockStartDay = 1; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockStartDay = 2; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       var lockEndDay = 4; // Thursday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       var lockStartTime = 6; // 6 AM (24-hour format)
       var lockEndTime = 19; // 7 PM (24-hour format)
@@ -136,10 +136,24 @@ function applyOverlay(selected_teams) {
     occurrences[team] = (occurrences[team] || 0) + 1;
   }
 
+  let doubles = []
+
+  for (const team in occurrences) {
+    if (occurrences[team] == 2) {
+      doubles.push(team)
+    }
+  }
+
   for (const button of buttons) {
     const buttonId = button.id;
     if (occurrences[buttonId] === 1) {
       button.style.backgroundColor = "yellow";
+      if (doubles.length == 4) {
+        button.onclick = function () {
+          modal('errorModal', false)
+          return false;
+        };
+      }
     } else if (occurrences[buttonId] === 2) {
       button.style.backgroundColor = "red";
       button.onclick = function () {
@@ -163,18 +177,23 @@ function submit() {
   });
 }
 
-function modal() {
+function modal(name, button) {
   // Get the modal
-  var modal = document.getElementById("myModal");
+  var modal = document.getElementById(name);
 
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  var span = modal.getElementsByClassName("close")[0];
 
-  // When the user clicks on the button, open the modal
-  btn.onclick = function() {
+  if (button) {
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+  }
+  else {
     modal.style.display = "block";
   }
 

@@ -44,23 +44,7 @@ cred = credentials.Certificate("nfl-pickem-6d43f-firebase-adminsdk-tuw35-496e644
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-ref = db.collection('users').document('7mYbml6IeHgwaRrMs1Y6')
-player_teams = ref.get({u'teams'})._data['teams']
-print(player_teams)
+ref = db.collection('users').document('wwPV13V24F9kjt8Hc8Ca')
+scores = [10]*20
 
-i = -1
-for short_name in player_teams:
-    i += 1
-    for long_name in teams:
-        if short_name.strip() == 'Bucs':
-            player_teams[i] = 'Tampa Bay Buccaneers'
-            break
-        elif short_name.strip() == 'Jags':
-            player_teams[i] = 'Jacksonville Jaguars'
-            break
-        elif short_name.strip() in long_name:
-            player_teams[i] = long_name
-            break
-print(player_teams)
-
-ref.update({u'teams':player_teams})
+ref.update({u'scores':scores})

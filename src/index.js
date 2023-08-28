@@ -26,7 +26,10 @@ signupForm.addEventListener('submit', (e) => {
                 last: last_name,
                 email: user,
                 password: pass,
-                total: 0
+                total: 0,
+                teams: [],
+                scores: [],
+                weekTeams: []
             })
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);

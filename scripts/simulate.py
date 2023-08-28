@@ -44,7 +44,14 @@ cred = credentials.Certificate("nfl-pickem-6d43f-firebase-adminsdk-tuw35-496e644
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-ref = db.collection('users').document('wwPV13V24F9kjt8Hc8Ca')
-scores = [10]*20
+i = 0
 
-ref.update({u'scores':scores})
+# Retrieve documents from the collection
+collection_ref = db.collection('test')
+documents = collection_ref.stream()
+
+# Update each document by adding the new field
+for document in documents:
+    document_ref = collection_ref.document(document.id)
+    document_ref.update({'weekTeams': [teams[i], teams[i + 1]]})
+    i += 2

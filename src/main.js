@@ -117,7 +117,7 @@ function button_click(button) {
           ];
         }
 
-        myButton.textContent = 'Locked: Opens on Monday at 6am';
+        myButton.textContent = 'Locked: Opens on Monday';
         myButton.style.fontSize = '20px'
         myButton.style.fontWeight = '300'
       }

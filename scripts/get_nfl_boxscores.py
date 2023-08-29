@@ -44,7 +44,7 @@ for game in d['events']:
 
   
 # connect to database
-cred = credentials.Certificate("nfl-pickem-6d43f-firebase-adminsdk-tuw35-496e6443da.json")
+cred = credentials.Certificate("/Users/jordanshefman/Desktop/NFL-Pick-Em/nfl-pickem-6d43f-firebase-adminsdk-tuw35-496e6443da.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 

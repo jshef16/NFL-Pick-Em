@@ -33,6 +33,9 @@ const teams = [
   { name: 'Washington Commanders', logo: "/img/washington.png",}
 ];
 
+let clicked_buttons = []
+let num_clicked_buttons = 0;
+
 window.onload = function() {
   title = document.querySelector('.page_title');
   title.innerHTML = "Hi, " + getCookie('name');
@@ -47,6 +50,12 @@ window.onload = function() {
     if (doc.exists) {
         var selected_teams = doc.data().teams;
         applyOverlay(selected_teams)
+        clicked_buttons = doc.data().weekTeams;
+        num_clicked_buttons = clicked_buttons.length
+        clicked_buttons.forEach(team => {
+          selected = document.getElementById(team)
+          selected.style = 'border: 2px solid rgb(76, 175, 80); opacity: 1;'
+        })
     } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -55,11 +64,16 @@ window.onload = function() {
     console.log("Error getting document:", error);
 });
 
-  modal('rulesModal', true)
-}
+  modal('rulesModal', true, 'myBtn')
 
-let num_clicked_buttons = 0;
-let clicked_buttons = []
+  modal = document.getElementById('submitModal')
+  document.getElementById('submit').addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+  modal.getElementsByClassName('close')[0].addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+}
 
 function button_click(button) {
   submit_button = document.getElementsByClassName('submit')
@@ -67,25 +81,23 @@ function button_click(button) {
       button.style.border = '';
       button.style.opacity = .5
       for (var i = 0; i < num_clicked_buttons; ++i) {
-        if (clicked_buttons[i] == button){
+        if (clicked_buttons[i] == button.id){
           clicked_buttons.splice(i, 1)
         }
       }
       num_clicked_buttons--;
-      console.log(clicked_buttons)
     } else {                                         /* button is currently unclicked, getting clicked */
       if (num_clicked_buttons < 2){                  /* making sure no more than 2 buttons are clicked */
         button.style.border =  '2px solid #4CAF50';  
         button.style.opacity = 1
         num_clicked_buttons++;
-        clicked_buttons.push(button)
-        console.log(clicked_buttons)
+        clicked_buttons.push(button.id)
       }
     }
     if (num_clicked_buttons == 2){
       submit_button[0].style.display = 'block'
       var myButton = document.getElementById('submit');
-      var lockStartDay = 2; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockStartDay = 1; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       var lockEndDay = 4; // Thursday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       var lockStartTime = 6; // 6 AM (24-hour format)
       var lockEndTime = 19; // 7 PM (24-hour format)
@@ -148,9 +160,9 @@ function applyOverlay(selected_teams) {
     const buttonId = button.id;
     if (occurrences[buttonId] === 1) {
       button.style.backgroundColor = "yellow";
-      if (doubles.length == 4) {
+      if (doubles.length > 3) {
         button.onclick = function () {
-          modal('errorModal', false)
+          modal('errorModal', false, 'na')
           return false;
         };
       }
@@ -164,12 +176,15 @@ function applyOverlay(selected_teams) {
 }
 
 function submit() {
+  button = document.getElementById('submitModal')
   userRef = db.collection('users').doc(getCookie('userID'))
+  console.log(clicked_buttons)
   return userRef.update({
-    weekTeams: [clicked_buttons[0].id, clicked_buttons[1].id]
+    weekTeams: [clicked_buttons[0], clicked_buttons[1]]
   })
   .then(() => {
       console.log("Document successfully updated!");
+      //alert('Your team selection has been successfully submitted!')
   })
   .catch((error) => {
       // The document probably doesn't exist.
@@ -177,12 +192,12 @@ function submit() {
   });
 }
 
-function modal(name, button) {
+function modal(name, button, buttonID) {
   // Get the modal
   var modal = document.getElementById(name);
 
   // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
+  var btn = document.getElementById(buttonID);
 
   // Get the <span> element that closes the modal
   var span = modal.getElementsByClassName("close")[0];

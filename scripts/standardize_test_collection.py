@@ -10,7 +10,7 @@ db = firestore.client()
 
 # Retrieve documents from the collection
 user_ref = db.collection('users')
-test_ref = db.collection('test')
+test_ref = db.collection('users2023')
 user_docs = user_ref.stream()
 test_docs = test_ref.stream()
 

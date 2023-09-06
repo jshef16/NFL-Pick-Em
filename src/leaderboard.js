@@ -13,7 +13,7 @@ window.onload = async function() {
 async function create_table() {
     var inner = "<thead><tr><th>Name</th><th>Score</th></tr></thead><tbody>";
     
-    const snapshot = await db.collection('users').get();
+    const snapshot = await db.collection('users2023').get();
     snapshot.docs.forEach(doc => {
       const add_text = "<tr><td style='text-align: left;'>" + doc.data()['first'] + " " + doc.data()['last'] + "<span style='display: none'> (" + doc.data()['email'] + ") </span> </td><td>" + doc.data()['total'] + "</td></tr>"
       inner += add_text;
@@ -41,14 +41,14 @@ async function create_table() {
 
 function compute_scores() {
     total_score = 0
-    db.collection('users').get().then((snapshot) => {
+    db.collection('users2023').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             total_score = 0
             if (doc.data()['scores']){
                 for (let i = 0; i < doc.data()['scores'].length; ++i) {
                     total_score += doc.data()['scores'][i]
                 }
-                var toUpdate = db.collection('users').doc(doc.id)
+                var toUpdate = db.collection('users2023').doc(doc.id)
                 toUpdate.update({
                     total:total_score
                 })
@@ -107,7 +107,7 @@ function make_rows_clickable() {
 }
 
 function high_week() {
-  db.collection('users').get().then((querySnapshot) => {
+  db.collection('users2023').get().then((querySnapshot) => {
     let max = 0
     var inner = ''
     let names = []

@@ -49,7 +49,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # Retrieve documents from the collection
-collection_ref = db.collection('test')
+collection_ref = db.collection('users2023')
 documents = collection_ref.stream()
 
 # Update each document by adding the new field
@@ -73,6 +73,6 @@ for document in documents:
 
     # increment total in db
     for score in weekScores:
-        document_ref.update({"total": firestore.Increment(score)})
+        document_ref.update({"total": firestore.Increment(score + 100)})
 
     document_ref.update({"weekTeams": []})

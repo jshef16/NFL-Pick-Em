@@ -63,7 +63,7 @@ function makeAccordion() {
 }
 
 function getUser(email, callback) {
-    db.collection('users').where('email', '==', email)
+    db.collection('users2023').where('email', '==', email)
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {

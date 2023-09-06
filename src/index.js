@@ -11,7 +11,7 @@ signupForm.addEventListener('submit', (e) => {
     var pass = signupForm.password.value;
     var exists = false
 
-    db.collection('users').get().then((snapshot) => {
+    db.collection('users2023').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             if (doc.data()['email'] == user) {
                 alert("An account with that email already exists. Please try again.")
@@ -21,7 +21,7 @@ signupForm.addEventListener('submit', (e) => {
         // if the user is not already in the database
         if (!exists) {
             // Saving the user information to the Firebase Realtime Database
-            db.collection("users").add({
+            db.collection("users2023").add({
                 first: first_name,
                 last: last_name,
                 email: user,
@@ -47,7 +47,7 @@ loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     var user = loginForm.lemail.value;
     var pass = loginForm.lpassword.value;
-    db.collection('users').get().then((snapshot) => {
+    db.collection('users2023').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             console.log("Checking " + doc.data()['email'] + " and " + doc.data()['password'] + " against " + user + " and " + pass)
             if (doc.data()['email'] == user) {

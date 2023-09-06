@@ -68,7 +68,7 @@ function makeAccordion() {
 }
 
 function getUser(email, callback) {
-    db.collection('users').where('email', '==', email)
+    db.collection('users2023').where('email', '==', email)
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -126,7 +126,7 @@ function makeHTML(teams, scores) {
   }
 
 function make_title(email) {
-    db.collection('users').where('email', '==', email)
+    db.collection('users2023').where('email', '==', email)
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {

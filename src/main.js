@@ -45,7 +45,7 @@ window.onload = function() {
     div.innerHTML = div.innerHTML + text;
   } );
 
-  var docRef = db.collection("users").doc(getCookie('userID'));
+  var docRef = db.collection("users2023").doc(getCookie('userID'));
   docRef.get().then((doc) => {
     if (doc.exists) {
         var selected_teams = doc.data().teams;
@@ -177,7 +177,7 @@ function applyOverlay(selected_teams) {
 
 function submit() {
   button = document.getElementById('submitModal')
-  userRef = db.collection('users').doc(getCookie('userID'))
+  userRef = db.collection('users2023').doc(getCookie('userID'))
   console.log(clicked_buttons)
   return userRef.update({
     weekTeams: [clicked_buttons[0], clicked_buttons[1]]

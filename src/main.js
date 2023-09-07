@@ -97,8 +97,8 @@ function button_click(button) {
     if (num_clicked_buttons == 2){
       submit_button[0].style.display = 'block'
       var myButton = document.getElementById('submit');
-      var lockStartDay = 1; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-      var lockEndDay = 4; // Thursday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockStartDay = 2; // Monday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      var lockEndDay = 3; // Thursday (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       var lockStartTime = 6; // 6 AM (24-hour format)
       var lockEndTime = 19; // 7 PM (24-hour format)
       var currentDate = new Date();

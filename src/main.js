@@ -132,6 +132,7 @@ function button_click(button) {
         myButton.textContent = 'Locked: Opens on Monday';
         myButton.style.fontSize = '20px'
         myButton.style.fontWeight = '300'
+        myButton.disabled = true
       }
     }
     else {

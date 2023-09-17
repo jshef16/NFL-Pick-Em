@@ -7,7 +7,7 @@ window.onload = async function() {
     table.innerHTML = await create_table()
     sortTable(1)
     make_rows_clickable()
-    high_week()
+    // high_week()
 }
 
 async function create_table() {
